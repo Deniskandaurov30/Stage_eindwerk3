@@ -7,7 +7,6 @@ import java.util.List;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userName;
     @Column (nullable = false)
     private String passWord;
