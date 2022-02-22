@@ -1,12 +1,37 @@
 package com.example.stage_eindwerk.controllers;
 
+import com.example.stage_eindwerk.models.Blogpost;
+import com.example.stage_eindwerk.services.BlogpostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 
 @Controller
 public class postController {
-    @GetMapping("post")
-    public String ShowAbout(){return "post";}
+
+    @GetMapping("/post")
+    public String ShowIndex(){return "post";}
+
+    @Autowired
+    private BlogpostService blogpostService;
+
+    @GetMapping("/indexBlogs")
+    public String getblogPosts(Model model){
+        List<Blogpost> blogposts = blogpostService.getAllBlogposts();
+        model.addAttribute("blogposts",blogposts);
+        return "index";
+    }
+
+    @GetMapping("/post2")
+    public String getblogDetail(Model model){
+        List <Blogpost> blogposts = blogpostService.getAllBlogposts();
+        model.addAttribute("blogposts",blogposts);
+        return "post";
+    }
 }

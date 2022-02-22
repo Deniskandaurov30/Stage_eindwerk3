@@ -15,10 +15,6 @@ public class BlogpostService {
     @Autowired
     private BlogpostRepository blogpostRepository;
 
-    public void createBlogpost(Blogpost blogpost){
-        blogpostRepository.save(blogpost);
-    }
-
     public List <Blogpost> getAllBlogposts(){
         return blogpostRepository.findAll();
     }
@@ -30,4 +26,12 @@ public class BlogpostService {
     public List <Blogpost> getBlogpostByBlogpostTitle(Blogpost blogpost){
         return blogpostRepository.findBlogpostByBlogpostTitle(blogpost.getBlogpostTitle());
     }
+
+    public void createBlogpost(Blogpost blogpost){
+        blogpostRepository.save(blogpost);
+    }
+
+    public void editBlogpost(Blogpost blogpost){}
+
+    public void deleteBlogpost(Blogpost blogpost){}
 }

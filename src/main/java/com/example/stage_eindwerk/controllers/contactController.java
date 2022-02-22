@@ -9,4 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class contactController {
     @GetMapping("contact")
     public String ShowAbout(){return "contact";}
+
+    public String signup;
 }

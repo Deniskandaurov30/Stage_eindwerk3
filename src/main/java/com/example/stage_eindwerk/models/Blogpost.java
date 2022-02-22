@@ -9,13 +9,13 @@ import java.util.List;
 public class Blogpost {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(nullable = false)
+    private int id;
     private String blogpostTitle;
     @OneToMany(mappedBy = "blogpost")
     private List <Rating> blogpostRating;
     @OneToMany(mappedBy = "blogpost")
     private List<Comment> blogpostComment;
+    @Lob
     private String content;
     private Date date;
     @ManyToOne
