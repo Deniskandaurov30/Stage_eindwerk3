@@ -20,10 +20,11 @@
         </div>
 
         <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" th:text = "${author.userName}">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" th:text = "${author.passWord}">
-            <input type="submit" class="fadeIn fourth" value="Log In">
+        <form method="post" th:action = "@{/login2}">
+
+            <input type="text" id="login" class="fadeIn second" name="userName" placeholder="login" th:text = "${author.userName}">
+            <input type="password" id="password" class="fadeIn third" name="passWord" placeholder="password" th:text = "${author.passWord}">
+            <input type="submit" class="fadeIn fourth" value="login">
         </form>
 
         <!-- Remind Passowrd -->

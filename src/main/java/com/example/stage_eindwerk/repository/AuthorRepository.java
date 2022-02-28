@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface AuthorRepository extends JpaRepository <Author,String> {
 
-    Author findAuthorByUserNameAndPassWord (String username, String password);
+    Author getAuthorByUserNameAndPassWord (String username, String password);
+    Author getAuthorByUserName (String username);
 
 
 }

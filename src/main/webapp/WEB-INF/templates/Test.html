@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+<span th:if="${session.author!=null}" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="logout">logout</a> </span>
+<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="logout">logout</a></li>
+<span th:if="${user?.name}" th:text="${user.name}" id="uname"></span>
+
+</body>
+</html>

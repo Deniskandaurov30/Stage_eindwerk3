@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Signup</a>
+                <a class="navbar-brand" href="index">Signup</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -27,9 +27,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index">Central</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="indexBlogs">Central</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact">Signup</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href = "@{author}">Signup</a></li>
                     </ul>
                 </div>
             </div>
@@ -61,58 +61,19 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <form  method="post" th:action = "@{/register}">
                                 <div class="form-floating">
-                                    <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">First name</label>
+                                    <input name="userName" class="form-control" id="username" type="text" placeholder="Enter your name..." th:text = "${author.userName}" data-sb-validations="required" />
+                                    <label for="username">Username</label>
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="lastName" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">Last name</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="username" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">Username</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
-                                    <label for="email">Email address</label>
-                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="street" type="text" placeholder="Enter your street name" data-sb-validations="required,street" />
-                                    <label for="email">Street</label>
-                                    <div class="invalid-feedback" data-sb-feedback="street:required">A street name is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="street:street">Street does not exist.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="house nr" type="number" placeholder="Enter your house number" data-sb-validations="required,house nr" />
-                                    <label for="email">Number</label>
-                                    <div class="invalid-feedback" data-sb-feedback="street:required">A house number is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="street:street">House number does not exist.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="city" type="text" placeholder="Enter your city name" data-sb-validations="required,city" />
-                                    <label for="email">City</label>
-                                    <div class="invalid-feedback" data-sb-feedback="street:required">A City name is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="street:street">City does not exist.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="zip" type="number" placeholder="Enter your zip number..." data-sb-validations="required" />
-                                    <label for="zip">Zip code</label>
-                                    <div class="invalid-feedback" data-sb-feedback="phone:required">A zip code is required.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <textarea class="form-control" id="password" placeholder="Enter your password here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                    <textarea  name="passWord" class="form-control" id="password" placeholder="Enter your password here..." th:text = "${author.passWord}" data-sb-validations="required"></textarea>
                                     <label for="password">Password</label>
                                     <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                                 </div>
                                 <div class="form-floating">
-                                    <textarea class="form-control" id="password2" placeholder="Enter your password here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                    <textarea class="form-control" id="password2" placeholder="Enter your password here..." th:text = "${author.passWord}" data-sb-validations="required"></textarea>
                                     <label for="password">Password</label>
                                     <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                                 </div>
@@ -135,7 +96,7 @@
                                 <!-- an error submitting the form-->
                                 <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error Creating account</div></div>
                                 <!-- Submit Button-->
-                                <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button>
+                                <input type="submit" class="fadeIn fourth" value="register">
                             </form>
                         </div>
                     </div>

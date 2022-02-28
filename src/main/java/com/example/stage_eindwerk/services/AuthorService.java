@@ -16,7 +16,11 @@ public class AuthorService {
         authorRepository.save(author);
     }
 
-    public Author findAuthorByUserNameAndPassWord(String username, String password){
-        return authorRepository.findAuthorByUserNameAndPassWord(username,password);
+    public Author getAuthorByUserNameAndPassWord(String username,String password){
+        return authorRepository.getAuthorByUserNameAndPassWord(username,password);
+    }
+
+    public Author getAuthorByUsername(String username){
+        return authorRepository.getAuthorByUserName(username);
     }
 }

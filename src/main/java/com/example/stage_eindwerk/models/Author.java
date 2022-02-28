@@ -14,15 +14,16 @@ public class Author {
     private List<Blogpost> blogposts;
     private String imageLocation;
 
+    public Author(String userName) {
+        this.userName = userName;
+    }
 
     public Author() {
     }
 
-    public Author(String userName, String passWord, List blogposts, List comments, String imageLocation) {
+    public Author(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
-        this.blogposts = blogposts;
-        this.imageLocation = imageLocation;
     }
 
     public String getUserName() {

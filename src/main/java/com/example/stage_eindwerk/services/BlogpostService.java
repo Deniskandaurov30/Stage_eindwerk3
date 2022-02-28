@@ -19,6 +19,9 @@ public class BlogpostService {
         return blogpostRepository.findAll();
     }
 
+    public Blogpost getBlogpostById(Integer id){
+        return blogpostRepository.findById(id).get();}
+
     public List <Blogpost> getBlogpostbyAuthor(Author author) {
         return blogpostRepository.findBlogpostByAuthor(author.getUserName());
     }

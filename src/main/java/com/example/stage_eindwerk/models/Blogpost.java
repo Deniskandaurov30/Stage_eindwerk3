@@ -21,6 +21,12 @@ public class Blogpost {
     @ManyToOne
     private Author author;
 
+    public Blogpost(String blogpostTitle, String content, Date date) {
+        this.blogpostTitle = blogpostTitle;
+        this.content = content;
+        this.date = date;
+    }
+
     public Blogpost() {
     }
 
