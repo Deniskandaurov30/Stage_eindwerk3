@@ -11,14 +11,14 @@ import java.util.List;
 @Service
 public class CommentService {
 
-    @Autowired
-    private CommentRepository commentRepository;
+    public CommentRepository commentRepository;
 
-    public List <Comment> findCommentsByAuthor (Author author){
-        return commentRepository.findCommentByAuthor(author.getUserName());
+    @Autowired
+    public CommentService(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
     }
 
-    public void createComment (Comment comment){
-        commentRepository.save(comment);
+    public Comment save(Comment comment) {
+        return commentRepository.saveAndFlush(comment);
     }
 }

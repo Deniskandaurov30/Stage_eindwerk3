@@ -30,7 +30,9 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="indexBlogs  ">Central</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login">Login</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact">Signup</a></li>
-                        <li th:if="${session.author!=null}" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="logout">logout</a></li>
+                        <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+                            <li class="active"><a th:href="@{/logout}">Sign Out</a></li>
+                        </ul>
                     </ul>
                 </div>
             </div>
