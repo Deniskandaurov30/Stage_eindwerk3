@@ -1,14 +1,12 @@
 package com.example.stage_eindwerk.controllers;
 
 import com.example.stage_eindwerk.models.Author;
+import com.example.stage_eindwerk.models.Comment;
 import com.example.stage_eindwerk.services.AuthorService;
+import com.example.stage_eindwerk.services.CommentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
@@ -22,10 +20,12 @@ public class AuthorController {
 
 
     private final AuthorService authorService;
+    private final CommentService commentService;
 
 
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService, CommentService commentService) {
         this.authorService = authorService;
+        this.commentService = commentService;
     }
 
 
@@ -59,14 +59,12 @@ public class AuthorController {
     }
 
     @GetMapping("contact")
-
     public String ShowAbout(Model model) {
         model.addAttribute("author", new Author());
         return "contact";}
 
 
     @GetMapping("logout")
-
     public String LogAuthorOut(HttpSession httpSession) throws ServletException, IOException {
         if (httpSession.getAttribute("author") != null) {
             httpSession.removeAttribute("author");
@@ -75,5 +73,17 @@ public class AuthorController {
         return "redirect:login";
     }
 
+    @RequestMapping(value = "/createComment", method = RequestMethod.POST)
+    public String displayComment(@ModelAttribute Comment fullComment, Model model) {
+        System.out.println(fullComment);
+       commentService.save(fullComment);
+        return "redirect:post/"+fullComment.getBlogpost().getId();
+    }
+
+    @RequestMapping(value = "/Comment", method = RequestMethod.GET)
+    public String displayComment(Model model) {
+       model.addAttribute("fullComment",new Comment());
+        return "comment";
+    }
 
 }

@@ -19,6 +19,6 @@ public class CommentService {
     }
 
     public Comment save(Comment comment) {
-        return commentRepository.saveAndFlush(comment);
+        return commentRepository.save(comment);
     }
 }

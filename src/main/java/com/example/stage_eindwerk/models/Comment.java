@@ -65,4 +65,15 @@ public class Comment {
     public void setCommentDate(Date commentDate) {
         this.commentDate = commentDate;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", blogpost=" + blogpost +
+                ", author=" + author +
+                ", comment='" + comment + '\'' +
+                ", commentDate=" + commentDate +
+                '}';
+    }
 }

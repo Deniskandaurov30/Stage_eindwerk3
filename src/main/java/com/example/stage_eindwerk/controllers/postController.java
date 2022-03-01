@@ -1,6 +1,7 @@
 package com.example.stage_eindwerk.controllers;
 
 import com.example.stage_eindwerk.models.Blogpost;
+import com.example.stage_eindwerk.models.Comment;
 import com.example.stage_eindwerk.services.BlogpostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -34,10 +35,11 @@ public class postController {
     }
 
     @GetMapping("post/{id}")
-    public String showBlogpost(@PathVariable String id, Model model){
+    public String showBlogpost(@PathVariable String id, Model model) {
         Integer idInInt = Integer.parseInt(id);
         Blogpost blogpost = blogpostService.getBlogpostById(idInInt);
-        model.addAttribute("blogpost",blogpost);
+        model.addAttribute("blogpost", blogpost);
+        model.addAttribute("fullComment",new Comment());
         return "post";
     }
 
