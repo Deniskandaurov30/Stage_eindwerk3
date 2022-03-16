@@ -20,6 +20,7 @@ public class Blogpost {
     private Date date;
     @ManyToOne
     private Author author;
+    private String imageLocation;
 
     public Blogpost(String blogpostTitle, String content, Date date) {
         this.blogpostTitle = blogpostTitle;
@@ -30,11 +31,9 @@ public class Blogpost {
     public Blogpost() {
     }
 
-    public Blogpost(int id, String blogpostTitle, List blogpostRating, List blogpostComment, String content, Date date, Author author) {
+    public Blogpost(int id, String blogpostTitle, String content, Date date, Author author) {
         this.id = id;
         this.blogpostTitle = blogpostTitle;
-        this.blogpostRating = blogpostRating;
-        this.blogpostComment = blogpostComment;
         this.content = content;
         this.date = date;
         this.author = author;
@@ -48,20 +47,28 @@ public class Blogpost {
         this.blogpostTitle = blogpostTitle;
     }
 
-    public List getBlogpostRating() {
+    public List<Rating> getBlogpostRating() {
         return blogpostRating;
     }
 
-    public void setBlogpostRating(List blogpostRating) {
+    public void setBlogpostRating(List<Rating> blogpostRating) {
         this.blogpostRating = blogpostRating;
     }
 
-    public List getBlogpostComment() {
+    public List<Comment> getBlogpostComment() {
         return blogpostComment;
     }
 
-    public void setBlogpostComment(List blogpostComment) {
+    public void setBlogpostComment(List<Comment> blogpostComment) {
         this.blogpostComment = blogpostComment;
+    }
+
+    public String getImageLocation() {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
     public String getContent() {
@@ -94,5 +101,16 @@ public class Blogpost {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Blogpost{" +
+                "id=" + id +
+                ", blogpostTitle='" + blogpostTitle + '\'' +
+                ", content='" + content + '\'' +
+                ", date=" + date +
+                ", author=" + author +
+                '}';
     }
 }

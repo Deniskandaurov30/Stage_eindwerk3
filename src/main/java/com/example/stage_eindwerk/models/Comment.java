@@ -8,9 +8,9 @@ public class Comment {
     @Id
     @GeneratedValue
     private int id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Blogpost blogpost;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Author author;
     private String comment;
     private Date commentDate;

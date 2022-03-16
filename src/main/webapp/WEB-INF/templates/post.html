@@ -32,16 +32,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="indexBlogs">Central</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{$contact}">Signup</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/about}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/indexBlogs}">Central</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/login}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/contact}">Signup</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+<!--        <header class="masthead" style="background-image: url('../assets/img/'+${blogpost.imageLocation};">-->
+            <header class="masthead" th:style="'background-image:url(' + @{/assets/img/{image}(image=${blogpost.imageLocation})} + ');'">
+
+<!--            <img  th:src ="@{/assets/img/{image}(image=${blogpost.imageLocation})} ">-->
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -65,41 +68,64 @@
                         <p th:text = "${blogpost.content}"></p>
                         <p th:text = "${#dates.format(blogpost.date,'dd-MM-yyyy')}"></p>
                             <a href="" th:text = "${blogpost.author.userName}"></a>
-                        <div class="fb-like" data-href="http://localhost:8080/post/1" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
+
                     </div>
                     <div class="container">
 
                         <div class="container">
 
+                            <a  th:href="@{/like/{id}(id=${blogpost.id})}" type="submit">
+                            <button>Like</button>
+                            <p th:text = "${likes}"></p>
+<!--                                <span th:text="${session.username == null}" type="hidden"></span>-->
+                                </a>
+
                             <div class="row" style="margin-top:20px">
                                 <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                                     <form autocomplete="off" action="#" th:action="@{/createComment}"
-                                          th:object="${fullComment}" method="post" role="form">
+                                          method="post" role="form">
 
                                         <h2 class="text-center">Write new comment</h2>
 
                                         <div class="form-group">
 <!--                                            <label th:if="${#fields.hasErrors('body')}" th:errors="*{body}"-->
 <!--                                                   class="alert alert-danger"></label>-->
-                                            <textarea th:field="*{comment}"
+                                            <textarea th:field="*{fullComment.comment}"
                                                       placeholder="Body" class="form-control input-lg"></textarea>
                                         </div>
 
-                                        <input type="hidden" th:field="*{blogpost}"/>
-                                        <input type="hidden" th:field="*{author}"/>
+                                        <label>
+                                            <input type="hidden" th:field="*{blogpost.id}"/>
+                                        </label>
+                                        <label>
+                                            <input type="hidden" th:field="*{author.userName}"/>
+                                        </label>
 
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-block">Comment</button>
                                         </div>
 
                                     </form>
+                                    <div th:each = "comment:${comments}">
+
+                                        <p th:text = "${#dates.format(comment.commentDate,'dd-MM-yyyy')}"></p>
+
+                                        <p th:text = "${comment.author.userName}"></p>
+
+                                        <p th:hidden = "${comment.blogpost.id}"></p>
+
+                                        <blockquote th:text = "${comment.comment}"></blockquote>
+                                        <hr>
+
+                                    </div>
+                                    <div th:hidden = "${author.userName}"></div>
+
+                                    <div th:hidden = "${blogpost.id}"></div>
                                 </div>
                             </div>
-
-                        </div>
-
                     </div>
                 </div>
+            </div>
             </div>
         </article>
         <!-- Footer-->

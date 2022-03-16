@@ -58,5 +58,13 @@ public class Author {
         this.imageLocation = imageLocation;
     }
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", imageLocation='" + imageLocation + '\'' +
+                '}';
+    }
 }
 

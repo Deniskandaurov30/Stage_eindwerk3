@@ -26,10 +26,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="indexBlogs  ">Central</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact">Signup</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/about}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/indexBlogs}  ">Central</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{login}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{contact}">Signup</a></li>
                         <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
                             <li class="active"><a th:href="@{/logout}">Sign Out</a></li>
                         </ul>
@@ -55,7 +55,7 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h1>Welcome to our blog</h1>
+                        <h1>Welcome to my blog</h1>
                         <p>Here u can find the most recent blogs from authors all around the world</p>
                         <p></p>
 

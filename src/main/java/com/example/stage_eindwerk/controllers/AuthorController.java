@@ -1,9 +1,12 @@
 package com.example.stage_eindwerk.controllers;
 
 import com.example.stage_eindwerk.models.Author;
+import com.example.stage_eindwerk.models.Blogpost;
 import com.example.stage_eindwerk.models.Comment;
 import com.example.stage_eindwerk.services.AuthorService;
+import com.example.stage_eindwerk.services.BlogpostService;
 import com.example.stage_eindwerk.services.CommentService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 
 
 @Controller
@@ -21,11 +25,13 @@ public class AuthorController {
 
     private final AuthorService authorService;
     private final CommentService commentService;
+    private final BlogpostService blogpostService;
 
 
-    public AuthorController(AuthorService authorService, CommentService commentService) {
+    public AuthorController(AuthorService authorService, CommentService commentService, BlogpostService blogpostService) {
         this.authorService = authorService;
         this.commentService = commentService;
+        this.blogpostService = blogpostService;
     }
 
 
@@ -74,8 +80,12 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/createComment", method = RequestMethod.POST)
-    public String displayComment(@ModelAttribute Comment fullComment, Model model) {
-        System.out.println(fullComment);
+    public String displayComment(@ModelAttribute ("fullComment") Comment fullComment,
+                                 @ModelAttribute ("blogpost") Blogpost blogpost, @ModelAttribute ("author")Author author) {
+        fullComment.setBlogpost(blogpostService.getBlogpostById(blogpost.getId()));
+        fullComment.setAuthor(authorService.getAuthorByUsername(author.getUserName()));
+        fullComment.setId(0);
+        fullComment.setCommentDate(new Date());
        commentService.save(fullComment);
         return "redirect:post/"+fullComment.getBlogpost().getId();
     }
@@ -85,5 +95,6 @@ public class AuthorController {
        model.addAttribute("fullComment",new Comment());
         return "comment";
     }
+
 
 }
